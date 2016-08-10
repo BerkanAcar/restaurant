@@ -1,0 +1,16 @@
+<h1 align="center">Hello from index.html.erb</h1>
+<hr/>
+<%= @places.count %>
+
+<table align="center">
+	<tr>
+		<th>title</th>
+		<th>description</th>
+	</tr>
+	<% @places.each do |place| %>
+		<tr>
+			<td><%= place.name %></td>
+			<td><%= place.description %></td>
+		</tr>
+	<% end %>
+</table>
