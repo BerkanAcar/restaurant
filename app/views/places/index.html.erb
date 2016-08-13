@@ -4,13 +4,14 @@
 
 <table align="center">
 	<tr>
-		<th>title</th>
+		<th>name</th>
 		<th>description</th>
 	</tr>
 	<% @places.each do |place| %>
 		<tr>
-			<td><%= place.name %></td>
+			<td><%= link_to place.name, place_path(place) %></td>
 			<td><%= place.description %></td>
 		</tr>
 	<% end %>
 </table>
+<%= link_to 'New Place', new_place_path %>

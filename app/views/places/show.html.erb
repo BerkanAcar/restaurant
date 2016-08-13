@@ -11,4 +11,6 @@
   <strong>Description:</strong>
   <%= @place.description %>
 </p>
-<%= link_to 'Delete', delete_place_path, method: :delete %>
+<%= link_to 'Edit', edit_place_path %>
+<%= link_to 'Delete', place_path, method: :delete %>
+<%= link_to 'Back', places_path %>
