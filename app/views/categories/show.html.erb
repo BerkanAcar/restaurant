@@ -1,0 +1,6 @@
+<h1><%= @category.title %></h1>
+<% @category.places.each do |place| %>
+	<%= place.name %></br>
+	<%= place.description %></br>
+<% end %>
+<%= link_to 'Back', :back %>
