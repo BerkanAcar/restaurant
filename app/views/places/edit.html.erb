@@ -1,0 +1,22 @@
+<h3>Edit Place</h3>
+<% if @place.errors.any? %>
+	<%= @place.errors.full_messages.join(', ') %>
+<% end %>
+
+<%= form_for @place do |f| %>
+	<%= f.label :Şirket_ismi %>
+	<%= f.text_field :name, placeholder: 'Şirket adı' %>
+	<%= f.label :adres %>
+	<%= f.text_area :address, placeholder: 'Adres' %>
+	<%= f.label :Kuruluş_tarihi %>
+	<%= f.date_field :established_at, placeholder: 'Kuruluş tarihi' %>
+	<%= f.label :Tel_no %>
+	<%= f.text_field :phone_number, placeholder: 'Tel no' %>
+	<%= f.label :email %>
+	<%= f.text_field :contact_mail, placeholder: 'Mail adresi' %>
+	<%= f.label :Şehir %>
+	<%= f.text_field :city, placeholder: 'Şehir' %>
+	<%= f.label :açıklama %>
+	<%= f.text_area :description, placeholder: 'Açıklama' %>
+	<%= f.submit %>
+<% end %>
