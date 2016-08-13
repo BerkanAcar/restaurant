@@ -18,5 +18,7 @@
 	<%= f.text_field :city, placeholder: 'Şehir' %>
 	<%= f.label :açıklama %>
 	<%= f.text_area :description, placeholder: 'Açıklama' %>
+	<%= f.label :kategori_seçiniz %>
+	<%= f.select :category_id, @categories %>
 	<%= f.submit %>
 <% end %>

@@ -5,6 +5,7 @@ class PlacesController < ApplicationController
 
 	def new
 		@place = Place.new
+		get_categories
 	end
 
 	def create
@@ -12,6 +13,7 @@ class PlacesController < ApplicationController
 		if @place.save
 			redirect_to place_path(@place)
 		else
+			get_categories
 			render :new
 		end
 	end
@@ -22,6 +24,7 @@ class PlacesController < ApplicationController
 
 	def edit
 		@place = Place.find(params[:id])
+		get_categories
 	end
 
 	def update
@@ -29,6 +32,7 @@ class PlacesController < ApplicationController
 		if @place.update(place_params)
 			redirect_to place_path(@place)
 		else
+			get_categories
 			render :edit
 		end
 	end
@@ -41,7 +45,11 @@ class PlacesController < ApplicationController
 	end
 
 	private
+		def get_categories
+			@categories = Category.all.collect {|c| [c.title, c.id]}
+		end
+
 		def place_params
-			params.require(:place).permit(:name, :address, :established_at, :phone_number, :contact_mail, :city, :description)
+			params.require(:place).permit(:name, :address, :established_at, :phone_number, :contact_mail, :city, :description, :category_id)
 		end
 end
