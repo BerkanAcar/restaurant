@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :get_place, only: [:create, :update, :show, :destroy]
   def create
     @comment = @place.comments.new(comment_params)
-    @comment.place_id = @place.id
+    #@comment.place_id = @place.id
     if @comment.save
       redirect_to place_path(@place)
     else
@@ -41,6 +41,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:body, :customer_id)
+      params.require(:comment).permit(:body)
     end
 end
