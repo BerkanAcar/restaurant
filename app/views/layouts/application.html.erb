@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if customer_signed_in? %>
+      <%= current_customer.email %>
+      <%= link_to 'Çıkış', destroy_customer_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Giriş', new_customer_session_path %>
+      <%= link_to 'Kayıt ol', new_customer_registration_path %>
+    <% end %>
   	<%= render 'flash' %>
     <%= yield %>
   </body>
