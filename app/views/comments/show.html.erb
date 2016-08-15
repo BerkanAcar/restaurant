@@ -1,6 +1,0 @@
-<%= @comment.body %>
-<%= form_for ([@place, @place.comments.build]) do |f| %>
-	<%= f.label :yorum %></br>
-	<%= f.text_area :body, placeholder: 'Yorum yapınız.' %></br>
-	<%= f.submit %>
-<% end %>

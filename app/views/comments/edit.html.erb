@@ -1,1 +1,7 @@
-<%= render 'comment' %>
+<h3>Edit comment</h3>
+<%= form_for ([@place, @comment]) do |f| %>
+	<%= f.label :yorum %></br>
+	<%= f.text_area :body, placeholder: 'Yorum yapınız.' %></br>
+	<%= f.submit %>
+	
+<% end %>

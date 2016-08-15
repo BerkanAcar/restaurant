@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :get_place, only: [:create, :update, :show, :destroy]
+  before_action :get_place, only: [:create, :update, :destroy, :edit]
   def create
     @comment = @place.comments.new(comment_params)
     #@comment.place_id = @place.id
@@ -12,20 +12,18 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-    @comment = @place.comments.find(params[:id])
-  end
-
   def edit
-    
+    @comment = @place.comments.find(params[:id])
   end
 
   def update
     @place.comments.find(params[:id])
-    if @place.comments.update(comment_params)
-      redirect_to edit_place_comment_path(@comment)
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to place_path(@place)
     else
       flash.now[:danger] = "error"
+      render :edit
     end
   end
 
