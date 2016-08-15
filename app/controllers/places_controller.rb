@@ -1,4 +1,7 @@
 class PlacesController < ApplicationController
+	before_action :get_place, only: [:edit, :update, :show, :destroy]
+	before_action :authenticate_owner!, except: [:index, :show]
+	before_action :authorize_owner!, only: [:edit, :update, :destroy]
 	def index
 		@places = Place.all
 	end
@@ -9,7 +12,7 @@ class PlacesController < ApplicationController
 	end
 
 	def create
-		@place = Place.new(place_params)
+		@place = current_owner.places.new(place_params)
 		if @place.save
 			flash[:success] = "Kayıt başarıyla oluşturuldu."
 			redirect_to place_path(@place)
@@ -20,17 +23,14 @@ class PlacesController < ApplicationController
 	end
 
 	def show
-		@place = Place.find(params[:id])
 		@comment = Comment.new
 	end
 
 	def edit
-		@place = Place.find(params[:id])
 		get_categories
 	end
 
 	def update
-		@place = Place.find(params[:id])
 		if @place.update(place_params)
 			redirect_to place_path(@place)
 		else
@@ -40,13 +40,21 @@ class PlacesController < ApplicationController
 	end
 
 	def destroy
-		@place = Place.find(params[:id])
 		if @place.destroy
 			redirect_to places_path
 		end
 	end
 
 	private
+
+		def get_place
+			@place = Place.find(params[:id])
+		end
+
+		def authorize_owner!
+			redirect_to root_path, notice: 'Başkasının verilerine müdahele edemezsin!!!' unless @place.owner_id == current_owner.id
+		end
+
 		def get_categories
 			@categories = Category.all.collect {|c| [c.title, c.id]}
 		end
