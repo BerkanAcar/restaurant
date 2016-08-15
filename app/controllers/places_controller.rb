@@ -11,6 +11,7 @@ class PlacesController < ApplicationController
 	def create
 		@place = Place.new(place_params)
 		if @place.save
+			flash[:success] = "Kayıt başarıyla oluşturuldu."
 			redirect_to place_path(@place)
 		else
 			get_categories
@@ -20,6 +21,7 @@ class PlacesController < ApplicationController
 
 	def show
 		@place = Place.find(params[:id])
+		@comment = Comment.new
 	end
 
 	def edit
