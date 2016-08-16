@@ -1,0 +1,14 @@
+<% @place.reservations.each do |reservation| %>
+	<%= reservation.customer.email %></br>
+	<%= reservation.date %></br>
+	<%= reservation.number_of_people %></br>
+	<% if current_customer.present? && current_customer.id == reservation.customer_id %>
+		<%= link_to 'Edit', edit_place_reservation_path(@place, reservation) %>
+		<%= link_to 'Delete', [reservation.place, reservation], method: :delete %></br>
+	<% end %>
+<% end %>
+<%= form_for ([@place, @place.reservations.build]) do |f| %>
+	<%= f.text_field :number_of_people %>
+	<%= f.date_field :date %>
+	<%= f.submit %>
+<% end %>

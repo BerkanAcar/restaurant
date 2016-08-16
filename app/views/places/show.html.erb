@@ -11,6 +11,7 @@
   <strong>Description:</strong>
   <%= @place.description %>
 </p>
+<%= render 'reservations/form' %>
 <% if current_owner.present? && @place.owner_id == current_owner.id %>
 	<%= link_to 'Edit', edit_place_path %>
 	<%= link_to 'Delete', place_path, method: :delete %>
