@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'places#index'
   resources :places do
   	resources :comments, except: [:index, :new]
+  	resources :reservations, only: [:create, :update]
   end
   resources :categories, only: [:index, :show]
 end
